@@ -1,0 +1,46 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #19A8E6;
+  color: #fff;
+  padding: 20px;
+}
+
+.logo {
+  font-size: 24px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out; /* tambahkan efek transisi */
+}
+
+nav a:hover {
+  color: #66B3FF; /* ubah warna ketika di hover */
+}
+
+.about a:hover {
+  color: #0073e6; /* ubah warna ketika di hover pada menu About */
+}
+
+.logout {
+  font-size: 14px;
+}
+
+.logout a {
+  color: #fff;
+  text-decoration: none;
+}
+
+
