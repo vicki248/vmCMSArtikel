@@ -23,10 +23,10 @@ public class CategoryArticle {
     @Column(name = "IDCategoryArticle")
     private Long idCategoryArticle;
 
-    @Length(message = ConstantMessage. WARNING_CATPROD_MAX_LENGTH_NAME, max = 40)
-    @NotEmpty(message = ConstantMessage.WARNING_CATPROD_NAME_CANNOT_EMPTY)
+//    @Length(message = ConstantMessage. WARNING_CATPROD_MAX_LENGTH_NAME, max = 40)
+//    @NotEmpty(message = ConstantMessage.WARNING_CATPROD_NAME_CANNOT_EMPTY)
     @Column(name = "NameCategoryArticle", nullable = false, length = 40)
-    private String nameCategoryProduct;
+    private String nameCategoryArticle;
 
 
     /*
@@ -58,12 +58,12 @@ public class CategoryArticle {
         this.idCategoryArticle = idCategoryArticle;
     }
 
-    public String getNameCategoryProduct() {
-        return nameCategoryProduct;
+    public String getNameCategoryArticle() {
+        return nameCategoryArticle;
     }
 
-    public void setNameCategoryProduct(String nameCategoryProduct) {
-        this.nameCategoryProduct = nameCategoryProduct;
+    public void setNameCategoryArticle(String nameCategoryArticle) {
+        this.nameCategoryArticle = nameCategoryArticle;
     }
 
     public Date getCreatedDate() {

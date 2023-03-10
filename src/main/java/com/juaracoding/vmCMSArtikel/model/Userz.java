@@ -20,7 +20,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "MstUser", uniqueConstraints = @UniqueConstraint(columnNames = "Email"))
-public class User {
+public class Userz {
     @Id
     @Column(name = "IDUser")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -87,6 +87,18 @@ public class User {
 
     @Column(name = "NoHP")
     private String noHP;
+
+    @ManyToOne
+    @JoinColumn(name = "IDAkses")
+    private Akses akses;
+
+    public Akses getAkses() {
+        return akses;
+    }
+
+    public void setAkses(Akses akses) {
+        this.akses = akses;
+    }
 
     public String getNoHP() {
         return noHP;

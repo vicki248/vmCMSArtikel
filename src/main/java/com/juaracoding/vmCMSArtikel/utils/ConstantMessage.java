@@ -51,67 +51,89 @@ public class ConstantMessage {
 
     public final static String ERROR_DATA_INVALID = "DATA TIDAK VALID";
     public final static String ERROR_SAVE_FAILED = "DATA GAGAL DISIMPAN";
+    public final static String ERROR_UPDATE_FAILED = "DATA GAGAL DIUBAH";
+    public final static String ERROR_CH_PWD_FAILED = "GANTI PASSWORD GAGAL";
     public final static String ERROR_INTERNAL_SERVER = "INTERNAL SERVER ERROR";
     public final static String ERROR_MAIL_FORM_JSON = "Malformed JSON request";
-    public final static String ERROR_EMAIL_FORMAT_INVALID = "FORMAT EMAIL TIDAK SESUAI (Nomor/Karakter@Nomor/Karakter)";
+    public final static String ERROR_EMAIL_FORMAT_INVALID = "FORMAT EMAIL TIDAK SESUAI (Nomor/Karakter@Nomor/Karakter Tanpa tanda | atau ')";
     public final static String ERROR_PHONE_NUMBER_FORMAT_INVALID = "FORMAT NOMOR HANDPHONE TIDAK SESUAI (+628XX-xxx) ex : +62813-24";
     public final static String ERROR_DATE_FORMAT_YYYYMMDD = "FORMAT TANGGAL TIDAK SESUAI (YYYY-mm-dd)";
     //    public final static String ERROR_DATE_FORMAT_DDMMYYYY = "FORMAT TANGGAL TIDAK SESUAI (dd-MM-YYYY)";
     public final static String ERROR_DATE_FORMAT_DDMMYYYY = "FORMAT TANGGAL TIDAK SESUAI (Tanggal(dd)-Bulan(MM)-Tahun(YYYY)) contoh : 01-01-2001";
-    //UAT -> USER ACCEPTENCE TESTER
     public final static String ERROR_UNEXPECTED = "UNEXPECTED ERROR";
     public final static String ERROR_UNPROCCESSABLE = "Validation error. Check 'errors' field for details.";
-
     public final static String ERROR_NO_CONTENT = "PERMINTAAN TIDAK DAPAT DIPROSES";
-    public final static String WELCOME_MESSAGE = "This is Springboot BootCamp BCAF BATCH 1";
-    public final static String TAKE_TOUR = "Ready To Start";
-    public final static String WARNING_EMAIL_EXIST = "EMAIL SUDAH TERDAFTAR";
-
 
     /*
-        Personal
-     */
-    public final static String WARNING_EMAIL_MANDATORY = "EMAIL WAJIB DIISI";
-    public final static String WARNING_EMAIL_MAX_LENGTH = "EMAIL MAKSIMAL 50 KARAKTER";
-
-
-
-    /*
-        Category Product
+        AUTH
      */
 
-    public final static String WARNING_CATPROD_MAX_LENGTH_NAME  = "MAKSIMAL NAMA KATEGORI PRODUK ADALAH 40 KARAKTER";
-    public final static String WARNING_CATPROD_NAME_CANNOT_EMPTY  = "NAMA KATEGORI PRODUK TIDAK BOLEH KOSONG";
-    public final static String WARNING_CATPROD_DESC_CANNOT_EMPTY  = "DESKRIPSI KATEGORI PRODUK TIDAK BOLEH KOSONG";
-    public final static String WARNING_CATPROD_MAX_LENGTH_DESC  = "MAKSIMAL DESKRIPSI KATEGORI PRODUK ADALAH 500 KARAKTER !";
-
-    /*
-        Kategori Buku
-     */
-    public final static String WARNING_NAMA_KATBUK_EMPTY  = "NAMA KATEGORI BUKU WAJIB DIISI";
-    public final static String WARNING_NAMA_KATBUK_MAX  = "NAMA KATEGORI BUKU MAKSIMAL 50 KARAKTER";
-    public final static String WARNING_DESKRIPSI_KATBUK_EMPTY  = "DESKRIPSI KATEGORI BUKU WAJIB DIISI";
-    public final static String WARNING_DESKRIPSI_KATBUK_MAX  = "DESKRIPSI KATEGORI MAKSIMAL 100 KARAKTER";
-
-
-    /*
-        Buku
-     */
-    public final static String WARNING_NAMA_BUKU_EMPTY  = "NAMA KATEGORI BUKU WAJIB DIISI";
-    public final static String WARNING_NAMA_BUKU_MAX  = "NAMA KATEGORI BUKU MAKSIMAL 50 KARAKTER";
-    public final static String WARNING_DESKRIPSI_BUKU_EMPTY  = "DESKRIPSI KATEGORI BUKU WAJIB DIISI";
-    public final static String WARNING_DESKRIPSI_BUKU_MAX  = "DESKRIPSI KATEGORI MAKSIMAL 100 KARAKTER";
-
-    /*
-        Film
-     */
-    public final static String WARNING_JUDUL_FILM_MANDATORY  = "JUDUL FILM WAJIB DIISI";
-    public final static String WARNING_TAHUN_FILM_MANDATORY  = "TAHUN FILM WAJIB DIISI";
-    public final static String WARNING_PEMUT_MANDATORY  = "PEMERAN UTAMA WAJIB DIISI";
-    public final static String WARNING_JUDUL_FILM_MAXLENGTH = "JUDUL FILM MAKSIMAL 50";
-    public final static String WARNING_PEMUT_MAXLENGTH = "PEMERAN UTAMA MAKSIMAL 50 KARAKTER";
-
+    public final static String ERROR_REGIS_FAILED = "REGISTRASI GAGAL";
+    public final static String ERROR_TOKEN_INVALID = "TOKEN TIDAK SESUAI";
+    public final static String SUCCESS_CHECK_REGIS = "PROSES REGISTRASI AMAN";
+    public final static String SUCCESS_LOGIN = "LOGIN BERHASIL";
+    public final static String SUCCESS_SEND_NEW_TOKEN = "TOKEN BARU BERHASIL DIKIRIM KE EMAIL";
+    public final static String SUCCESS_CHANGE_PWD = "PASSWORD BERHASIL DIUBAH";
+    public final static String SUCCESS_TOKEN_MATCH = "TOKEN SUDAH SESUAI";
+    public final static String ERROR_EMAIL_ISEXIST = "REGISTRASI GAGAL! EMAIL SUDAH TERDAFTAR";
+    public final static String ERROR_USER_ISACTIVE = "REGISTRASI GAGAL! EMAIL SUDAH TERDAFTAR";
+    public final static String ERROR_NOHP_ISEXIST = "REGISTRASI GAGAL! NO HP SUDAH TERDAFTAR";
+    public final static String ERROR_USERNAME_ISEXIST = "REGISTRASI GAGAL! USERNAME SUDAH TERDAFTAR";
     public final static String ERROR_EMAIL_MAX_MIN_LENGTH = "PANJANG EMAIL MIN 15 MAKS 50 !!";
     public final static String ERROR_EMAIL_IS_NULL = "EMAIL TIDAK BOLEH NULL!!";
     public final static String ERROR_EMAIL_IS_EMPTY = "EMAIL TIDAK BOLEH EMPTY!!";
+    public final static String ERROR_USER_NOT_EXISTS = "USER TIDAK TERDAFTAR / USERNAME DAN PASSWORD SALAH !!";
+    public final static String ERROR_LOGIN_FAILED = "USERNAME ATAU PASSWORD SALAH !!";
+    public final static String ERROR_FLOW_INVALID = "PROSES TIDAK SESUAI DENGAN PROSEDUR";
+
+    public final static String ERROR_USRNAME_MAX_MIN_LENGTH = "USERNAME MIN 10 MAKS 30  KARAKTER!!";
+    public final static String ERROR_USRNAME_IS_NULL = "USERNAME TIDAK BOLEH NULL!!";
+    public final static String ERROR_USRNAME_IS_EMPTY = "USERNAME TIDAK BOLEH KOSONG!!";
+    public final static String ERROR_PASSWORD_MAX_MIN_LENGTH = "PASSWORD MIN 8 MAKS 25  KARAKTER!!";
+    public final static String ERROR_PASSWORD_IS_NULL = "PASSWORD TIDAK BOLEH NULL!!";
+    public final static String ERROR_PASSWORD_IS_EMPTY = "PASSWORD TIDAK BOLEH KOSONG!!";
+    public final static String ERROR_NAMALENGKAP_MAX_MIN_LENGTH = "NAMA LENGKAP MIN 8 MAKS 40  KARAKTER!!";
+    public final static String ERROR_NAMALENGKAP_IS_NULL = "NAMA LENGKAP TIDAK BOLEH NULL!!";
+    public final static String ERROR_NAMALENGKAP_IS_EMPTY = "NAMA LENGKAP TIDAK BOLEH KOSONG!!";
+
+    public final static String ERROR_NOHP_MAX_MIN_LENGTH = "NO HANDPHONE MIN 11 MAKS 18  KARAKTER!!";
+    public final static String ERROR_NOHP_IS_NULL = "NO HANDPHONE TIDAK BOLEH NULL!!";
+    public final static String ERROR_NOHP_IS_EMPTY = "NO HANDPHONE TIDAK BOLEH KOSONG!!";
+    public final static String ERROR_TOKEN_IS_EMPTY = "TOKEN TIDAK BOLEH KOSONG!!";
+    public final static String ERROR_TOKEN_IS_NULL = "TOKEN TIDAK BOLEH BERNILAI NULL!!";
+
+    public final static String ERROR_NEW_PASSWORD_MAX_MIN_LENGTH = "PASSWORD BARU MIN 8 MAKS 25  KARAKTER!!";
+    public final static String ERROR_NEW_PASSWORD_IS_NULL = "PASSWORD BARU TIDAK BOLEH NULL!!";
+    public final static String ERROR_NEW_PASSWORD_IS_EMPTY = "PASSWORD BARU TIDAK BOLEH KOSONG!!";
+
+    public final static String ERROR_CONFIRM_PASSWORD_MAX_MIN_LENGTH = "KONFIRMASI PASSWORD BARU MIN 8 MAKS 25  KARAKTER!!";
+    public final static String ERROR_CONFIRM_PASSWORD_IS_NULL = "KONFIRMASI PASSWORD BARU TIDAK BOLEH NULL!!";
+    public final static String ERROR_CONFIRM_PASSWORD_IS_EMPTY = "KONFIRMASI PASSWORD BARU TIDAK BOLEH KOSONG!!";
+
+    public final static String ERROR_PASSWORD_NOT_SAME = "PASSWORD LAMA SALAH !!";
+    public final static String ERROR_TOKEN_FORGOTPWD_NOT_SAME = "TOKEN SALAH !!";
+    public final static String ERROR_PASSWORD_CONFIRM_FAILED = "PASSWORD KONFIRMASI TIDAK COCOK DENGAN PASSWORD BARU !!";
+    public final static String ERROR_PASSWORD_IS_SAME = "PASSWORD BARU TIDAK BOLEH SAMA DENGAN PASSWORD LAMA !!";
+
+    /*
+        Menu
+     */
+    public final static String WARNING_MENU_NAME_LENGTH = "NAMA MENU MAKS 25  KARAKTER!!";
+    public final static String WARNING_MENU_PATH_LENGTH = "NAMA MENU MAKS 50  KARAKTER!!";
+    public final static String WARNING_MENU_ENDPOINTLENGTH = "ENDPOINT MENU MAKS 30  KARAKTER!!";
+
+    public final static String WARNING_MENU_NOT_EXISTS = "MENU TIDAK DOTEMUKAN";
+    public final static String WARNING_MENU_PATH_INVALID = "PATH MENU TIDAK SESUAI (HARUS DIAWALI /api/)";
+    public final static String WARNING_MENU_END_POINTS_INVALID = "END POINTS MENU TIDAK SESUAI (dapat ditanyakan ke bagian IT untuk format nya)";
+
+    /*
+        MENU HEADER
+     */
+    public final static String WARNING_MENU_HEADER_NOT_EXISTS = "GROUP MENU TIDAK DOTEMUKAN";
+
+    /*
+        DEMO
+     */
+
+    public final static String WARNING_DEMO_NOT_EXISTS = "DEMO TIDAK DOTEMUKAN";
 }

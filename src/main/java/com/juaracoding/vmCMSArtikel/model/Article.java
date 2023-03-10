@@ -19,28 +19,29 @@ public class Article {
     private static final long serialversionUID = 1L;
 
     @Id
-    @Column(name = "IDArticle")
+    @Column(name = "IdArticle")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idArticle;
 
-    @NotEmpty
-    @NotNull
+//    @NotEmpty
+//    @NotNull
     @Column(name = "TitleArticle")
     private String titleArticle;
 
-    @NotEmpty
-    @NotNull
+//    @NotEmpty
+//    @NotNull
+    @Column(name = "Slug")
+    private String slug;
+
+//    @NotEmpty
+//    @NotNull
     @Column(name = "BodyArticle")
     private String bodyArticle;
 
-    @NotEmpty
-    @NotNull
+//    @NotEmpty
+//    @NotNull
     @Column(name = "ImageArticle")
     private String imageArticle;
-
-    @ManyToOne
-    @JoinColumn(name = "IDUser")
-    private User user;
 
     @ManyToOne
     @JoinColumn(name = "IDCategoryArticle")
@@ -83,6 +84,14 @@ public class Article {
         this.titleArticle = titleArticle;
     }
 
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
     public String getBodyArticle() {
         return bodyArticle;
     }
@@ -97,14 +106,6 @@ public class Article {
 
     public void setImageArticle(String imageArticle) {
         this.imageArticle = imageArticle;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public CategoryArticle getCategoryArticle() {
