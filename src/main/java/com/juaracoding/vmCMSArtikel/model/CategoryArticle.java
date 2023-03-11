@@ -20,7 +20,7 @@ import java.util.Date;
 public class CategoryArticle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IDCategoryArticle")
+    @Column(name = "IdCategoryArticle")
     private Long idCategoryArticle;
 
 //    @Length(message = ConstantMessage. WARNING_CATPROD_MAX_LENGTH_NAME, max = 40)

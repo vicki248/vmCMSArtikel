@@ -26,20 +26,12 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 public class MainController {
-    private StudentService studentService;
     private MappingAttribute mappingAttribute = new MappingAttribute();
     private Map<String,Object> objectMapper = new HashMap<String,Object>();
-
-    @Autowired
-    public MainController(StudentService studentService) {
-        this.studentService = studentService;
-    }
 
     @GetMapping("/")
     public String pageTwo(Model model, WebRequest request)
     {
-        model.addAttribute("students", studentService.getAllStudents());
-
         Captcha captcha = CaptchaUtils.createCaptcha(150, 60);
 
         Userz users = new Userz();
@@ -52,7 +44,6 @@ public class MainController {
             mappingAttribute.setAttribute(model,objectMapper,request);
             return "article/article";
         }
-//        return "authz_signin";
-        return "article/article";
+        return "authz_signin";
     }
 }

@@ -22,6 +22,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class CategoryArticleService {
@@ -30,31 +32,38 @@ public class CategoryArticleService {
 
     @Autowired
     public CategoryArticleService(CategoryArticleRepo categoryArticleRepo) {
-        strExceptionArr[0] = "CategoryArticleService";
         this.categoryArticleRepo = categoryArticleRepo;
     }
-
-    public ResponseEntity<Object> saveCategoryArticle(CategoryArticle categoryArticle)
-    {
-        String strMessage = ConstantMessage.SUCCESS_SAVE;
-        try
-        {
-            categoryArticleRepo.save(categoryArticle);
-        }
-        catch (Exception e)
-        {
-            strExceptionArr[1]="saveCategoryArticle(CategoryArticle categoryArticle)";
-            LoggingFile.exceptionStringz(strExceptionArr,e, OtherConfig.getFlagLogging());
-            return new ResponseHandler().generateResponse(ConstantMessage.ERROR_SAVE_FAILED,
-                    HttpStatus.BAD_REQUEST,null,"FI02001",null);
-        }
-
-        return new ResponseHandler().generateResponse(strMessage,
-                HttpStatus.CREATED,null,null,null);
+    public List<CategoryArticle> getAllCategoryArticle() {
+        return categoryArticleRepo.findAll();
     }
 
-    public Page<CategoryArticle> findPageSortBy(Pageable pageable){
+//    public ResponseEntity<Object> saveCategoryArticle(CategoryArticle categoryArticle)
+//    {
+//        String strMessage = ConstantMessage.SUCCESS_SAVE;
+//        try
+//        {
+//            categoryArticleRepo.save(categoryArticle);
+//        }
+//        catch (Exception e)
+//        {
+//            strExceptionArr[1]="saveCategoryArticle(CategoryArticle categoryArticle)";
+//            LoggingFile.exceptionStringz(strExceptionArr,e, OtherConfig.getFlagLogging());
+//            return new ResponseHandler().generateResponse(ConstantMessage.ERROR_SAVE_FAILED,
+//                    HttpStatus.BAD_REQUEST,null,"FI02001",null);
+//        }
+//
+//        return new ResponseHandler().generateResponse(strMessage,
+//                HttpStatus.CREATED,null,null,null);
+//    }
+//
+//    public Page<CategoryArticle> findPageSortBy(Pageable pageable){
+//
+//        return categoryArticleRepo.findAll(pageable);
+//    }
 
-        return categoryArticleRepo.findAll(pageable);
-    }
+//    // get all categories
+//    public List<CategoryArticle> getAllCategories() {
+//        return categoryArticleRepo.findAllCategories();
+//    }
 }

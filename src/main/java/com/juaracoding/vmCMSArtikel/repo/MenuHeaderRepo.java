@@ -22,5 +22,4 @@ public interface MenuHeaderRepo extends JpaRepository<MenuHeader,Long> {
     Page<MenuHeader> findByIsDeleteAndIdMenuHeader(Pageable pageable, Byte isDelete, String valueparamValue);
     Page<MenuHeader> findByIsDeleteAndNamaMenuHeader(Pageable pageable,Byte isDelete,String valueparamValue);
     Page<MenuHeader> findByIsDeleteAndDeskripsiMenuHeader(Pageable pageable,Byte isDelete,String valueparamValue);
-
 }

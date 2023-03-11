@@ -37,14 +37,12 @@ public class MenuHeader {
     private Integer modifiedBy;
 
     @Column(name = "IsDelete", nullable = false)
-    private Byte isDelete = 0;//khusus disini default 0 karena setelah verifikasi baru di update menjadi 1
+    private Byte isDelete = 1;
     /*
         end audit trails
      */
 
-    //    @OneToMany
-//    @JoinColumn(name = "IDKategoriBuku")
-//    private List<Menu> menu;
+
     public Long getIdMenuHeader() {
         return idMenuHeader;
     }

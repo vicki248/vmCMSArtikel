@@ -9,19 +9,19 @@ Version 1.1
 */
 
 import com.juaracoding.vmCMSArtikel.model.CategoryArticle;
+import com.juaracoding.vmCMSArtikel.repo.CategoryArticleRepo;
 import com.juaracoding.vmCMSArtikel.service.CategoryArticleService;
+import org.springframework.ui.Model;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
-@RequestMapping("api/categoryArticle/")
+@RequestMapping("/api/v1/categoryArticle")
 public class CategoryArticleController {
     private CategoryArticleService categoryArticleService;
 
@@ -35,12 +35,20 @@ public class CategoryArticleController {
         this.categoryArticleService = categoryArticleService;
     }
 
-    @PostMapping("v1/sv")
-    public ResponseEntity<Object> saveCategoryArticle(@Valid
-                                              @RequestBody CategoryArticle categoryArticle
-    )
-    {
-        return categoryArticleService. saveCategoryArticle(categoryArticle);
+    @Autowired
+    private CategoryArticleRepo categoryArticleRepo;
 
+    @GetMapping
+    public ResponseEntity<List<CategoryArticle>> getAllCategoryArticles() {
+        List<CategoryArticle> categoryArticles = categoryArticleService.getAllCategoryArticle();
+        return ResponseEntity.ok(categoryArticles);
     }
+//    @PostMapping("v1/sv")
+//    public ResponseEntity<Object> saveCategoryArticle(@Valid
+//                                              @RequestBody CategoryArticle categoryArticle
+//    )
+//    {
+//        return categoryArticleService. saveCategoryArticle(categoryArticle);
+//
+//    }
 }

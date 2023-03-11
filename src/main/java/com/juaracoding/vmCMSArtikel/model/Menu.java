@@ -20,13 +20,13 @@ public class Menu {
     @Column(name = "IDMenu")
     private Long idMenu;
 
-    @Column(name = "NamaMenu")
+    @Column(name = "NamaMenu",nullable = false,length = 25)
     private String namaMenu;
 
-    @Column(name = "PathMenu")
+    @Column(name = "PathMenu",nullable = false,length = 50)
     private String pathMenu;
 
-    @Column(name = "EndPoints")
+    @Column(name = "EndPoints",nullable = false,length = 30)
     private String endPoint;
 
     @Column(name ="CreatedDate" , nullable = false)
@@ -41,7 +41,7 @@ public class Menu {
     private Integer modifiedBy;
 
     @Column(name = "IsDelete", nullable = false)
-    private Byte isDelete = 0;//khusus disini default 0 karena setelah verifikasi baru di update menjadi 1
+    private Byte isDelete = 1;
     /*
         end audit trails
      */

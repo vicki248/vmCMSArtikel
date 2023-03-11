@@ -14,7 +14,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ArticleRepo extends JpaRepository<Article,Long> {
-    Page<Article> findByIsShow(Pageable page , byte byteIsDelete);
-    Page<Article> findByIsShowAndTitleArticleContainsIgnoreCase(Pageable page , byte byteIsDelete, String values);
-    Page<Article> findByIsShowAndIdArticleContainsIgnoreCase(Pageable page , byte byteIsDelete, Long values);
+
 }

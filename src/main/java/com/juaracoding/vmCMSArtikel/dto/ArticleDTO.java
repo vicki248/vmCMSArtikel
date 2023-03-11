@@ -9,6 +9,11 @@ Version 1.1
 */
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.juaracoding.vmCMSArtikel.model.Article;
+import com.juaracoding.vmCMSArtikel.model.CategoryArticle;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ArticleDTO {
@@ -17,7 +22,7 @@ public class ArticleDTO {
     private String slug;
     private String bodyArticle;
     private String imageArticle;
-    private CategoryArticleDTO categoryArticle;
+    private Long idCategoryArticle;
 
     public Long getIdArticle() {
         return idArticle;
@@ -59,12 +64,39 @@ public class ArticleDTO {
         this.imageArticle = imageArticle;
     }
 
-    public CategoryArticleDTO getCategoryArticle() {
-        return categoryArticle;
+    public Long getIdCategoryArticle() {
+        return idCategoryArticle;
     }
 
-    public void setCategoryArticle(CategoryArticleDTO categoryArticle) {
-        this.categoryArticle = categoryArticle;
+    public void setIdCategoryArticle(Long idCategoryArticle) {
+        this.idCategoryArticle = idCategoryArticle;
     }
 
+    public static ArticleDTO fromEntity(Article article) {
+        ArticleDTO dto = new ArticleDTO();
+        dto.setIdArticle(article.getIdArticle());
+        dto.setTitleArticle(article.getTitleArticle());
+        dto.setSlug(article.getSlug());
+        dto.setBodyArticle(article.getBodyArticle());
+        dto.setIdCategoryArticle(article.getIdCategoryArticle().getIdCategoryArticle());
+        dto.setImageArticle(article.getImageArticle());
+        return dto;
+    }
+
+    public static List<ArticleDTO> fromEntities(List<Article> articles) {
+        return articles.stream().map(ArticleDTO::fromEntity).collect(Collectors.toList());
+    }
+
+    public Article toEntity() {
+        Article article = new Article();
+        article.setIdArticle(this.getIdArticle());
+        article.setTitleArticle(this.getTitleArticle());
+        article.setSlug(this.getSlug());
+        article.setBodyArticle(this.getBodyArticle());
+        CategoryArticle category = new CategoryArticle();
+        category.setIdCategoryArticle(this.getIdCategoryArticle());
+        article.setIdCategoryArticle(category);
+        article.setImageArticle(this.getImageArticle());
+        return article;
+    }
 }

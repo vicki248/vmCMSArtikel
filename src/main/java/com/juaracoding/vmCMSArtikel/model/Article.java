@@ -28,29 +28,36 @@ public class Article {
     @Column(name = "TitleArticle")
     private String titleArticle;
 
-//    @NotEmpty
-//    @NotNull
-    @Column(name = "Slug")
+    @Column(name = "Slug", unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String slug;
+
+    @PrePersist
+    public void setSlug() {
+        String slug = this.titleArticle
+                .toLowerCase()
+                .replaceAll("[^a-z0-9]+", "-")
+                .replaceAll("^-|-$", "");
+
+        this.slug = slug;
+    }
 
 //    @NotEmpty
 //    @NotNull
     @Column(name = "BodyArticle")
     private String bodyArticle;
 
-//    @NotEmpty
-//    @NotNull
     @Column(name = "ImageArticle")
     private String imageArticle;
 
     @ManyToOne
-    @JoinColumn(name = "IDCategoryArticle")
-    private CategoryArticle categoryArticle;
+    @JoinColumn(name = "IdCategoryArticle")
+    private CategoryArticle idCategoryArticle;
 
 
     /*
-       start audit trails
-    */
+           start audit trails
+        */
     @Column(name ="CreatedDate" , nullable = false)
     private Date createdDate = new Date();
 
@@ -108,12 +115,12 @@ public class Article {
         this.imageArticle = imageArticle;
     }
 
-    public CategoryArticle getCategoryArticle() {
-        return categoryArticle;
+    public CategoryArticle getIdCategoryArticle() {
+        return idCategoryArticle;
     }
 
-    public void setCategoryArticle(CategoryArticle categoryArticle) {
-        this.categoryArticle = categoryArticle;
+    public void setIdCategoryArticle(CategoryArticle idCategoryArticle) {
+        this.idCategoryArticle = idCategoryArticle;
     }
 
     public Date getCreatedDate() {

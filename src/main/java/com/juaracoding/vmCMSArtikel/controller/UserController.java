@@ -240,7 +240,7 @@ public class UserController {
             request.setAttribute("HTML_MENU", new GenerateMenuString().menuInnerHtml(nextUser.getAkses()),1);//cara ambil request.getAttribute("USR_NAME",1)
             mappingAttribute.setAttribute(model,objectMapper,request);//urutan nya ini terakhir
 //            return "index_1";
-            return "redirect:/";
+            return "redirect:/api/";
         }
         else
         {

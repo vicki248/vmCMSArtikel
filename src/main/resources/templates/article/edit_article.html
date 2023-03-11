@@ -1,60 +1,50 @@
-<form th:action="@{/api/usrmgmnt/v1/article/edit/{id} (id=${article.idArticle})}"
-      th:object="${article}" method="POST" id="ubahArticle" xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"><!--	ID FORM TIDAK BOLEH SAMA DENGAN ID MODALS DI FRAGMENT -->
-  <input type="hidden" value="6e13fc166d54411be233d08296755631" /><!-- form generate id security of front end -->
-  <div th:if="${#fields.hasErrors('global')}" class="error-box error-danger" >
-    <p th:each="err : ${#fields.errors('global')}" th:text="${err}"  class="error"/>
-  </div>
-  <div class ="form-group">
-    <label> Nama Article </label>
-    <input
-            type = "text"
-            name = "namaArticle"
-            th:field = "*{namaArticle}"
-            class = "form-control"
-            placeholder="Masukkan Nama Article"
-    />
-    <ul>
-      <li th:each="err : ${#fields.errors('namaArticle')}" th:text="${err}" class="error" />
-    </ul>
-  </div>
-
-
-  <div class = "modal-footer">
-    <button type="submit" class = "btn btn-primary">
-      Submit
-    </button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-  </div>
-</form>
-
-<script th:inline="javascript">
-/*<![CDATA[*/
-    $("#ubahArticle").submit(function(event) {
-          event.preventDefault(); //prevent default action
-          let post_url = $(this).attr("action"); //get form action url
-          let request_method = $(this).attr("method"); //get form GET/POST method
-          let form_data = $(this).serialize(); //Encode form elements for submission
-          $.ajax({
-              url: post_url,
-              type: request_method,
-              data: form_data
-            }).done(function(response) { //
-            let pattern = /6e13fc166d54411be233d08296755631/i;
-			let result = response.match(pattern);
-            if(result)
-            {
-				$("#server-results").html(response);
-            }
-            else
-            {
-				$('#editArticle').modal('hide');
-				confirm("DATA BERHASIL DIUBAH");
-            }
-
-            });
-        });
-
-/*]]>*/
-</script>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>CMS Article</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+  <link th:href="@{/styles/style.css}" rel="stylesheet" />
+  <link th:href="@{/styles/navbar.css}" rel="stylesheet" />
+  <link th:href="@{/styles/banner.css}" rel="stylesheet" />
+  <!--	<link rel="stylesheet" th:href="@{/css/style.css}" href="../../css/style.css"/>-->
+  <!--	<link rel="stylesheet" th:href="@{/css/error.css}" href="../../css/error.css"/>-->
+  <!--	<link rel="stylesheet" th:href="@{/css/login.css}" href="../../css/login.css"/>-->
+</head>
+<body>
+<div th:replace="header/navheader::navapalah"></div>
+<div class="container my-2">
+  <h1>Article</h1>
+  <hr>
+  <h2>Update Article</h2>
+  <form th:action="@{/api/updateArticle}" th:object="${article}" method="POST">
+    <div class="form-group">
+      <label for="titleArticle">Title Article</label>
+      <input type="text" th:field="*{titleArticle}" placeholder="Title Article" class="form-control" id="titleArticle">
+    </div>
+    <div class="form-group">
+      <label for="content">Content Article</label>
+      <textarea id="content" name="content" th:field="*{bodyArticle}" placeholder="Content Article"
+                class="form-control" rows="5"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="category">Category</label>
+      <select th:field="*{idCategoryArticle}" id="category" class="form-control">
+        <option value="">-- Select Category --</option>
+        <option th:each="category : ${categories}"
+                th:value="${category.idCategoryArticle}"
+                th:text="${category.name}"
+                th:selected="${category.idCategoryArticle == article.categoryArticle.idCategoryArticle}"></option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="thumbnail">Thumbnail</label>
+      <input type="file" name="thumbnail" id="thumbnail" accept="image/*" class="form-control-file">
+    </div>
+    <button type="submit" class="btn btn-info"> Update Article</button>
+  </form>
+</div>
+</body>
+</html>

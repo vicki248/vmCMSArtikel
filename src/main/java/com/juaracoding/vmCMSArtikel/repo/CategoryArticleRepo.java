@@ -10,6 +10,14 @@ Version 1.1
 
 import com.juaracoding.vmCMSArtikel.model.CategoryArticle;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface CategoryArticleRepo extends JpaRepository<CategoryArticle,Long> {
+//    // custom query to get all categories
+//    @Query("SELECT c FROM CategoryArticle c")
+//    List<CategoryArticle> findAllCategories();
+
 }
