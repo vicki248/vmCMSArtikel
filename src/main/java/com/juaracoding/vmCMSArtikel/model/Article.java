@@ -52,7 +52,7 @@ public class Article {
 
     @ManyToOne
     @JoinColumn(name = "IdCategoryArticle")
-    private CategoryArticle idCategoryArticle;
+    private CategoryArticle category;
 
 
     /*
@@ -115,12 +115,12 @@ public class Article {
         this.imageArticle = imageArticle;
     }
 
-    public CategoryArticle getIdCategoryArticle() {
-        return idCategoryArticle;
+    public CategoryArticle getCategory() {
+        return category;
     }
 
-    public void setIdCategoryArticle(CategoryArticle idCategoryArticle) {
-        this.idCategoryArticle = idCategoryArticle;
+    public void setCategory(CategoryArticle category) {
+        this.category = category;
     }
 
     public Date getCreatedDate() {

@@ -9,15 +9,17 @@ Version 1.1
 */
 
 import com.juaracoding.vmCMSArtikel.model.CategoryArticle;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
 public interface CategoryArticleRepo extends JpaRepository<CategoryArticle,Long> {
-//    // custom query to get all categories
-//    @Query("SELECT c FROM CategoryArticle c")
-//    List<CategoryArticle> findAllCategories();
+    List<CategoryArticle> findAll();
+    Page<CategoryArticle> findByIsDelete(Pageable page , byte byteIsDelete);
+    List<CategoryArticle> findByIsDelete(byte byteIsDelete);
+    Page<CategoryArticle> findByIsDeleteAndIdCategoryArticle(Pageable pageable, Byte isDelete, String valueparamValue);
+    Page<CategoryArticle> findByIsDeleteAndNameCategoryArticle(Pageable pageable, Byte isDelete, String valueparamValue);
 
 }

@@ -25,9 +25,9 @@ public class CategoryArticle {
 
 //    @Length(message = ConstantMessage. WARNING_CATPROD_MAX_LENGTH_NAME, max = 40)
 //    @NotEmpty(message = ConstantMessage.WARNING_CATPROD_NAME_CANNOT_EMPTY)
+
     @Column(name = "NameCategoryArticle", nullable = false, length = 40)
     private String nameCategoryArticle;
-
 
     /*
         start audit trails

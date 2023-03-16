@@ -12,6 +12,7 @@ public class CategoryArticleDTO {
     private Long idCategoryArticle;
     private String nameCategoryArticle;
 
+
     public Long getIdCategoryArticle() {
         return idCategoryArticle;
     }

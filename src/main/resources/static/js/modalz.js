@@ -6,6 +6,7 @@ function funcHandler(event)
 		var urlz = button.dataset.url
 		$(dataTarget).on('show.bs.modal',function(){
 			$.get(urlz, function (data) {
+			alert('masuk ke sini')
 					$(dataTarget).find('.modal-body').html(data);
 					$(dataTarget).find('.modal-title').text(dataTitle)
 			});

@@ -11,18 +11,36 @@ Version 1.1
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.juaracoding.vmCMSArtikel.model.Article;
 import com.juaracoding.vmCMSArtikel.model.CategoryArticle;
+import com.juaracoding.vmCMSArtikel.utils.ConstantMessage;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ArticleDTO {
     private Long idArticle;
+    @NotNull
+    @NotEmpty
+    @Length(message = ConstantMessage.WARNING_MENU_NAME_LENGTH,max = 100)
     private String titleArticle;
     private String slug;
+    @NotNull
+    @NotEmpty
+    @Length(message = ConstantMessage.WARNING_MENU_NAME_LENGTH,max = 2000)
     private String bodyArticle;
     private String imageArticle;
     private Long idCategoryArticle;
+
+
+    @JsonIgnoreProperties("listArticleAkses")
+    private List<AksesDTO> listAksesArticle;
+
+    @NotNull
+    private CategoryArticleDTO category;
+
 
     public Long getIdArticle() {
         return idArticle;
@@ -72,13 +90,34 @@ public class ArticleDTO {
         this.idCategoryArticle = idCategoryArticle;
     }
 
+
+    public List<AksesDTO> getListAksesArticle() {
+        return listAksesArticle;
+    }
+
+    public void setListAksesArticle(List<AksesDTO> listAksesArticle) {
+        this.listAksesArticle = listAksesArticle;
+    }
+
+    public CategoryArticleDTO getCategory() {
+        return category;
+    }
+
+    public String getNameCategoryArticle() {
+        return category.getNameCategoryArticle();
+    }
+
+    public void setCategory(CategoryArticleDTO category) {
+        this.category = category;
+    }
+
     public static ArticleDTO fromEntity(Article article) {
         ArticleDTO dto = new ArticleDTO();
         dto.setIdArticle(article.getIdArticle());
         dto.setTitleArticle(article.getTitleArticle());
         dto.setSlug(article.getSlug());
         dto.setBodyArticle(article.getBodyArticle());
-        dto.setIdCategoryArticle(article.getIdCategoryArticle().getIdCategoryArticle());
+        dto.setIdCategoryArticle(article.getCategory().getIdCategoryArticle());
         dto.setImageArticle(article.getImageArticle());
         return dto;
     }
@@ -89,13 +128,13 @@ public class ArticleDTO {
 
     public Article toEntity() {
         Article article = new Article();
+        CategoryArticle category = new CategoryArticle();
         article.setIdArticle(this.getIdArticle());
         article.setTitleArticle(this.getTitleArticle());
         article.setSlug(this.getSlug());
         article.setBodyArticle(this.getBodyArticle());
-        CategoryArticle category = new CategoryArticle();
         category.setIdCategoryArticle(this.getIdCategoryArticle());
-        article.setIdCategoryArticle(category);
+        article.setCategory(category);
         article.setImageArticle(this.getImageArticle());
         return article;
     }

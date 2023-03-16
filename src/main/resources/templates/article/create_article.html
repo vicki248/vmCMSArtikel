@@ -42,7 +42,7 @@
 
         <div class="form-group">
 <!--            <label for="category">Category</label>-->
-            <select th:field="*{idCategoryArticle}" id="category" class="form-control">
+            <select th:field="*{category.idCategoryArticle}" id="categoryList" class="form-control">
                 <option value="">-- Select Category --</option>
 <!--                <option th:each="category : ${categories}"-->
 <!--                        th:value="${category.idCategoryArticle}"-->
@@ -50,17 +50,17 @@
 <!--                        th:selected="${category.idCategoryArticle == article.idCategoryArticle}">-->
 <!--                </option>-->
 <!--                <option th:value="1">1</option>-->
-                <option th:each="category : ${categories}"
-                        th:value="${category.idCategoryArticle}"
-                        th:text="${category.name}">
+                <option th:each="listCategory : ${categories}"
+                        th:value="${listCategory.idCategoryArticle}"
+                        th:text="${listCategory.nameCategoryArticle}">
                 </option>
             </select>
         </div>
 
-        <div class="form-group">
-            <label for="thumbnail">Thumbnail</label>
-            <input type="file" name="thumbnail" id="thumbnail" accept="image/*" class="form-control-file">
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label for="thumbnail">Thumbnail</label>-->
+<!--            <input type="file" name="thumbnail" id="thumbnail" accept="image/*" class="form-control-file">-->
+<!--        </div>-->
 
         <button type="submit" class="btn btn-info"> Save Article</button>
     </form>
