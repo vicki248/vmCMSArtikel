@@ -19,32 +19,35 @@
   <h1>Article</h1>
   <hr>
   <h2>Update Article</h2>
-  <form th:action="@{/api/updateArticle}" th:object="${article}" method="POST">
+  <form th:action="@{/api/saveArticle}" th:object="${article}" method="POST">
+    <input type="hidden" th:field="*{idArticle}">
     <div class="form-group">
       <label for="titleArticle">Title Article</label>
-      <input type="text" th:field="*{titleArticle}" placeholder="Title Article" class="form-control" id="titleArticle">
+      <input type="text" th:field="*{titleArticle}" placeholder="Title Article" class="form-control" id="titleArticle"
+      th:value="${article.titleArticle}">
     </div>
     <div class="form-group">
       <label for="content">Content Article</label>
       <textarea id="content" name="content" th:field="*{bodyArticle}" placeholder="Content Article"
-                class="form-control" rows="5"></textarea>
+                class="form-control" rows="5" th:text="${article.bodyArticle}"></textarea>
     </div>
     <div class="form-group">
-      <label for="category">Category</label>
-      <select th:field="*{category.idCategoryArticle}" id="category" class="form-control">
+<!--      <label for="category">Category</label>-->
+      <select th:field="*{category.idCategoryArticle}" id="categoryList" class="form-control">
         <option value="">-- Select Category --</option>
-        <option th:each="category : ${categories}"
-                th:value="${category.idCategoryArticle}"
-                th:text="${category.nameCategoryArticle}"
-                th:selected="${category.idCategoryArticle == article.category.idCategoryArticle}"></option>
+        <option th:each="ListCategory : ${categories}"
+                th:value="${ListCategory.idCategoryArticle}"
+                th:text="${ListCategory.nameCategoryArticle}"
+                th:selected="${ListCategory.idCategoryArticle == article.category.idCategoryArticle}"></option>
       </select>
     </div>
-    <div class="form-group">
-      <label for="thumbnail">Thumbnail</label>
-      <input type="file" name="thumbnail" id="thumbnail" accept="image/*" class="form-control-file">
-    </div>
-    <button type="submit" class="btn btn-info"> Update Article</button>
+    <button type="submit" class="btn btn-info" onclick="showAlert()">Update Article</button>
   </form>
 </div>
+<script>
+    function showAlert() {
+        alert("DATA BERHASIL DIUBAH");
+    }
+</script>
 </body>
 </html>

@@ -13,6 +13,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
+		<bootstrap.version>4.0.0-2</bootstrap.version><!--PENAMBAHAN 06-03-2023        -->
+		<webjars-locator.version>0.30</webjars-locator.version><!--PENAMBAHAN 06-03-2023        -->
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,6 +25,18 @@
 <!--			<artifactId>spring-session-jdbc</artifactId>-->
 <!--			<version>${project.parent.version}</version>-->
 <!--		</dependency>-->
+		<dependency><!--PENAMBAHAN 06-03-2023        -->
+			<groupId>org.webjars</groupId>
+			<artifactId>webjars-locator</artifactId>
+			<version>${webjars-locator.version}</version>
+		</dependency>
+
+		<dependency><!--PENAMBAHAN 06-03-2023        -->
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>${bootstrap.version}</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>cn.apiclub.tool</groupId>

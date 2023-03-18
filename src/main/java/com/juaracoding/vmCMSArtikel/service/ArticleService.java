@@ -10,7 +10,6 @@ Version 1.1
 
 import com.juaracoding.vmCMSArtikel.configuration.OtherConfig;
 import com.juaracoding.vmCMSArtikel.dto.ArticleDTO;
-import com.juaracoding.vmCMSArtikel.handler.ResourceNotFoundException;
 import com.juaracoding.vmCMSArtikel.handler.ResponseHandler;
 import com.juaracoding.vmCMSArtikel.model.Article;
 import com.juaracoding.vmCMSArtikel.repo.ArticleRepo;
@@ -28,8 +27,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.*;
 
 @Service
@@ -53,20 +50,14 @@ public class ArticleService {
     @Autowired
     public ArticleService(ArticleRepo articleRepo) {
         mapColumn();
-//        listItemPerPage();
         strExceptionArr[0] = "ArticleService";
         this.articleRepo = articleRepo;
     }
 
-    public List<Article> getAllArticle() {
-        return articleRepo.findAll();
-    }
-
     public void saveArticle(Article article) {
         this.articleRepo.save(article);
+
     }
-
-
 
     public Article getArticleById(long id) {
         Optional<Article> optional = articleRepo.findById(id);
@@ -89,108 +80,6 @@ public class ArticleService {
 
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         return this.articleRepo.findAll(pageable);
-    }
-
-
-
-
-    public Map<String, Object> saveArticle(Article article, WebRequest request) {
-        String strMessage = ConstantMessage.SUCCESS_SAVE;
-        Object strUserIdz = request.getAttribute("USR_ID",1);
-
-        try {
-            if(strUserIdz==null)
-            {
-                return new ResponseHandler().generateModelAttribut(ConstantMessage.ERROR_FLOW_INVALID,
-                        HttpStatus.NOT_ACCEPTABLE,null,"FV03001",request);
-            }
-            article.setCreatedBy(Integer.parseInt(strUserIdz.toString()));
-            article.setCreatedDate(new Date());
-            articleRepo.save(article);
-        } catch (Exception e) {
-            strExceptionArr[1] = "saveArticle(Article article, WebRequest request) --- LINE 67";
-            LoggingFile.exceptionStringz(strExceptionArr, e, OtherConfig.getFlagLogging());
-            return new ResponseHandler().generateModelAttribut(ConstantMessage.ERROR_SAVE_FAILED,
-                    HttpStatus.BAD_REQUEST,
-                    transformToDTO.transformObjectDataEmpty(objectMapper,mapColumnSearch),
-                    "FE03001", request);
-        }
-        return new ResponseHandler().generateModelAttribut(strMessage,
-                HttpStatus.CREATED,
-                transformToDTO.transformObjectDataSave(objectMapper, article.getIdArticle(),mapColumnSearch),
-                null, request);
-    }
-
-    public Map<String, Object> updateArticle(Long idArticle,Article article, WebRequest request) {
-        String strMessage = ConstantMessage.SUCCESS_SAVE;
-        Object strUserIdz = request.getAttribute("USR_ID",1);
-
-        try {
-            Article nextArticle = articleRepo.findById(idArticle).orElseThrow(
-                    ()->null
-            );
-
-            if(nextArticle==null)
-            {
-                return new ResponseHandler().generateModelAttribut(ConstantMessage.WARNING_MENU_NOT_EXISTS,
-                        HttpStatus.NOT_ACCEPTABLE,
-                        transformToDTO.transformObjectDataEmpty(objectMapper,mapColumnSearch),
-                        "FV03002",request);
-            }
-            if(strUserIdz==null)
-            {
-                return new ResponseHandler().generateModelAttribut(ConstantMessage.ERROR_FLOW_INVALID,
-                        HttpStatus.NOT_ACCEPTABLE,
-                        null,
-                        "FV03003",request);
-            }
-            nextArticle.setIdArticle(article.getIdArticle());
-            nextArticle.setTitleArticle(article.getTitleArticle());
-//            nextArticle.setCategory(article.getCategory());
-            nextArticle.setBodyArticle(article.getBodyArticle());
-            nextArticle.setModifiedBy(Integer.parseInt(strUserIdz.toString()));
-            nextArticle.setModifiedDate(new Date());
-
-        } catch (Exception e) {
-            strExceptionArr[1] = "updateArticle(Long idArticle,Article article, WebRequest request) --- LINE 92";
-            LoggingFile.exceptionStringz(strExceptionArr, e, OtherConfig.getFlagLogging());
-            return new ResponseHandler().generateModelAttribut(ConstantMessage.ERROR_SAVE_FAILED,
-                    HttpStatus.BAD_REQUEST,
-                    transformToDTO.transformObjectDataEmpty(objectMapper,mapColumnSearch),
-                    "FE03002", request);
-        }
-        return new ResponseHandler().generateModelAttribut(strMessage,
-                HttpStatus.CREATED,
-                transformToDTO.transformObjectDataEmpty(objectMapper,mapColumnSearch),
-                null, request);
-    }
-    @Transactional(rollbackFor = Exception.class)
-    public Map<String, Object> saveUploadFileArticle(List<Article> listArticle,
-                                                  MultipartFile multipartFile,
-                                                  WebRequest request) throws Exception {
-        List<Article> listArticleResult = null;
-        String strMessage = ConstantMessage.SUCCESS_SAVE;
-
-        try {
-            listArticleResult = articleRepo.saveAll(listArticle);
-            if (listArticleResult.size() == 0) {
-                strExceptionArr[1] = "saveUploadFile(List<Article> listArticle, MultipartFile multipartFile, WebRequest request) --- LINE 82";
-                LoggingFile.exceptionStringz(strExceptionArr, new ResourceNotFoundException("FILE KOSONG"), OtherConfig.getFlagLogging());
-                return new ResponseHandler().generateModelAttribut(ConstantMessage.ERROR_EMPTY_FILE + " -- " + multipartFile.getOriginalFilename(),
-                        HttpStatus.BAD_REQUEST, null, "FV03004", request);
-            }
-        } catch (Exception e) {
-            strExceptionArr[1] = "saveUploadFile(List<Article> listArticle, MultipartFile multipartFile, WebRequest request) --- LINE 88";
-            LoggingFile.exceptionStringz(strExceptionArr, e, OtherConfig.getFlagLogging());
-            return new ResponseHandler().generateModelAttribut(ConstantMessage.ERROR_SAVE_FAILED,
-                    HttpStatus.BAD_REQUEST, null, "FE03002", request);
-        }
-        return new ResponseHandler().
-                generateModelAttribut(strMessage,
-                        HttpStatus.CREATED,
-                        transformToDTO.transformObjectDataEmpty(objectMapper,mapColumnSearch),
-                        null,
-                        request);
     }
 
     public Map<String,Object> findAllArticle(Pageable pageable, WebRequest request)
@@ -319,7 +208,7 @@ public class ArticleService {
     {
         mapColumnSearch.put("id","ID ARTICLE");
         mapColumnSearch.put("title","TITLE ARTICLE");
-        mapColumnSearch.put("body","ARTICLE");
+        mapColumnSearch.put("body","CONTENT ARTICLE");
         mapColumnSearch.put("category","CATEGORY ARTICLE");
         //mapColumnSearch.get('path')->PATH MENU
     }
@@ -332,7 +221,7 @@ public class ArticleService {
         }
         if(paramColumn.equals("id"))
         {
-            return articleRepo.findByIsShowAndIdArticleContainsIgnoreCase(pageable,(byte) 1,Long.parseLong(paramValue));
+            return articleRepo.findByIsShowAndIdArticle(pageable,(byte) 1,Long.parseLong(paramValue));
         } else if (paramColumn.equals("title")) {
             return articleRepo.findByIsShowAndTitleArticleContainsIgnoreCase(pageable,(byte) 1,paramValue);
         } else if (paramColumn.equals("body")) {

@@ -11,7 +11,6 @@ Version 1.1
 import com.juaracoding.vmCMSArtikel.configuration.OtherConfig;
 import com.juaracoding.vmCMSArtikel.dto.ArticleDTO;
 import com.juaracoding.vmCMSArtikel.model.Article;
-import com.juaracoding.vmCMSArtikel.model.CategoryArticle;
 import com.juaracoding.vmCMSArtikel.repo.ArticleRepo;
 import com.juaracoding.vmCMSArtikel.repo.CategoryArticleRepo;
 import com.juaracoding.vmCMSArtikel.service.ArticleService;
@@ -25,7 +24,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
@@ -57,60 +55,6 @@ public class ArticleController {
         this.categoryArticleService = categoryArticleService;
     }
 
-
-
-//    private void mapSorting()
-//    {
-//        mapSorting.put("id","idArticle");
-//        mapSorting.put("title","titleArticle");
-//        mapSorting.put("article","bodyArticle");
-//        mapSorting.put("category","nameCategoryArticle");
-//    }
-
-//    @GetMapping("/")
-//    public String showArticles(Model model) {
-//        List<Article> articles = articleRepo.findAll();
-//        model.addAttribute("articles", articles);
-//        return "article/article";
-//    }
-
-//    @GetMapping("/")
-//    public String viewHomePage(Model model, WebRequest request) {
-//        mappingAttribute.setAttribute(model,objectMapper,request);//untuk set session
-//        if(request.getAttribute("USR_ID",1)==null){
-//            return "redirect:/api/check/logout";
-//        }
-//
-//
-//        return findPaginated(1, "titleArticle", "asc", model,request);
-//
-//
-
-
-
-
-//    @GetMapping("/add")
-//    public String showAddForm(Model model) {
-//        model.addAttribute("article", new Article());
-//        model.addAttribute("categories", categoryArticleRepo.findAll());
-//        return "add-article";
-//    }
-//
-//    @PostMapping("/add")
-//    public String addArticle(@ModelAttribute("article") Article article, Model model) {
-//        articleService.saveArticle(article);
-//        return "redirect:/article/list";
-//    }
-
-    // display list of article
-//    @GetMapping("/")
-//    public String viewHomePage(Model model, WebRequest request) {
-//        mappingAttribute.setAttribute(model,objectMapper,request);//untuk set session
-//        if(request.getAttribute("USR_ID",1)==null){
-//            return "redirect:/api/check/logout";
-//        }
-//        return findPaginated(1, "titleArticle", "asc", model,request);
-//    }
     @GetMapping("/")
     public String viewHomePage(Model model, WebRequest request) {
         if (OtherConfig.getFlagSessionValidation().equals("y")) {
@@ -131,7 +75,7 @@ public class ArticleController {
         model.addAttribute("valueFirst","");
         model.addAttribute("sizeComponent",5);
 //        return "/article/article";
-        return findPaginated(1, "titleArticle", "asc", model,request);
+        return findPaginated(1, "idArticle", "asc", model,request);
 
     }
 
@@ -149,8 +93,10 @@ public class ArticleController {
         sortzBy = mapSorting.get(sortzBy);
         sortzBy = sortzBy==null?"idArticle":sortzBy;
         Pageable pageable = PageRequest.of(pagez==0?pagez:pagez-1,Integer.parseInt(sizeComponent.equals("")?"5":sizeComponent), sortz.equals("asc")?Sort.by(sortzBy):Sort.by(sortzBy).descending());
+        if (valueFirst == null || valueFirst.trim().isEmpty()) {
+            columnFirst = ""; // Jika valueFirst kosong, maka kolom dicari di-set kosong
+        }
         objectMapper = articleService.findByPage(pageable,request,columnFirst,valueFirst);
-//        mapSorting.put("title","titleArticle");
         mappingAttribute.setAttribute(model,objectMapper,request);
         model.addAttribute("article",new ArticleDTO());
         model.addAttribute("currentPage",pagez==0?1:pagez);
@@ -185,6 +131,7 @@ public class ArticleController {
             return "redirect:/api/check/logout";
         }
         // save article to database
+        article.setCreatedBy(Integer.parseInt(request.getAttribute("USR_ID",1).toString()));
         articleService.saveArticle(article);
         return "redirect:/api/";
     }
@@ -198,6 +145,7 @@ public class ArticleController {
         }
         // get article from the service
         Article article = articleService.getArticleById(id);
+
         // set article as a model attribute to pre-populate the form
         model.addAttribute("article", article);
         return "/article/edit_article";

@@ -23,8 +23,8 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idArticle;
 
-//    @NotEmpty
-//    @NotNull
+    @NotEmpty
+    @NotNull
     @Column(name = "TitleArticle")
     private String titleArticle;
 
@@ -42,8 +42,8 @@ public class Article {
         this.slug = slug;
     }
 
-//    @NotEmpty
-//    @NotNull
+    @NotEmpty
+    @NotNull
     @Column(name = "BodyArticle")
     private String bodyArticle;
 

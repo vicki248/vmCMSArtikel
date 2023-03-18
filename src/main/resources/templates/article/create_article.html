@@ -42,7 +42,7 @@
 
         <div class="form-group">
 <!--            <label for="category">Category</label>-->
-            <select th:field="*{category.idCategoryArticle}" id="categoryList" class="form-control">
+            <select th:field="*{category.idCategoryArticle}" id="categoryList" class="form-control" >
                 <option value="">-- Select Category --</option>
 <!--                <option th:each="category : ${categories}"-->
 <!--                        th:value="${category.idCategoryArticle}"-->
@@ -62,8 +62,15 @@
 <!--            <input type="file" name="thumbnail" id="thumbnail" accept="image/*" class="form-control-file">-->
 <!--        </div>-->
 
-        <button type="submit" class="btn btn-info"> Save Article</button>
+        <button type="submit" class="btn btn-info" onclick="showAlert()"> Save Article</button>
     </form>
 </div>
+
+<script>
+    function showAlert() {
+        alert("DATA BERHASIL DISIMPAN");
+    }
+</script>
+
 </body>
 </html>
